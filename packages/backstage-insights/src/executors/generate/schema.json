@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Backstage Insights Generator",
+  "description": "Generates a catalog-info.yaml file from an Nx workspace.",
+  "type": "object",
+  "properties": {
+    "configPath": {
+      "type": "string",
+      "description": "Optional path to the insights.config.json file. If not provided, it will be searched for in standard locations."
+    }
+  },
+  "required": []
+}
