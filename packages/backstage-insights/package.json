@@ -1,6 +1,6 @@
 {
   "name": "@frontenderz/backstage-insights",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An Nx plugin to generate a Backstage software catalog from your monorepo.",
   "executors": "./executors.json",
   "generators": "./generators.json",
