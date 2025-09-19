@@ -1,0 +1,17 @@
+name: DEBUG - Inspect Tag Push Event
+
+# This workflow is designed to run on ANY tag push to help with debugging.
+on:
+  push:
+    tags:
+      - '**' # A very greedy glob to catch everything
+
+jobs:
+  inspect-event:
+    name: Inspect GitHub Event Payload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        # The toJSON() function is a powerful debugging tool. It converts the
+        # entire 'github' context object into a JSON string that we can print.
+        run: echo "${{ toJSON(github) }}"
