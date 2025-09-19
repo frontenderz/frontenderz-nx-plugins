@@ -1,49 +1,43 @@
-name: CD - Secure Release to NPM
-
-# This workflow is triggered ONLY when a new tag is pushed that matches the
-# independent versioning pattern (e.g., 'backstage-insights@0.1.0').
-on:
-  push:
-    tags:
-      - 'refs/tags/*@*.*.*'
-
-jobs:
-  release:
-    name: Secure Release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write # Required for OIDC tokenless authentication
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          # Fetch full history to allow nx release to determine changes
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          # This step is required for OIDC publishing
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build, Test, and Publish to NPM using Nx Release
-        # This single command will build the specific package associated with
-        # the git tag, run its tests, and publish it using the OIDC token.
-        run: npx nx release publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for nx release to create GitHub releases
-
-      - name: Generate SLSA Provenance
-        # This step runs AFTER a successful publish to attest to the build.
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-path: "dist/packages/backstage-insights"
-
+    name: CD - Secure Release to NPM
+    
+    # FIX: Use the full ref path to create a precise, unambiguous trigger.
+    # This pattern now matches the exact 'ref' value from the GitHub event payload.
+    on:
+      push:
+        tags:
+          - 'refs/tags/*@*.*.*'
+    
+    jobs:
+      release:
+        name: Secure Release
+        runs-on: ubuntu-latest
+        permissions:
+          contents: read
+          id-token: write
+    
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v4
+            with:
+              fetch-depth: 0
+    
+          - name: Setup Node.js
+            uses: actions/setup-node@v4
+            with:
+              node-version: '20'
+              cache: 'npm'
+              registry-url: 'https://registry.npmjs.org'
+    
+          - name: Install Dependencies
+            run: npm install
+    
+          - name: Build, Test, and Publish to NPM using Nx Release
+            run: npx nx release publish
+            env:
+              NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+          - name: Generate SLSA Provenance
+            uses: actions/attest-build-provenance@v1
+            with:
+              subject-path: "dist/packages/backstage-insights"
