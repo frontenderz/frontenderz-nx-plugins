@@ -5,7 +5,7 @@ name: CD - Secure Release to NPM
 on:
   push:
     tags:
-      - '*@[0-9]+.[0-9]+.[0-9]+'
+      - 'refs/tags/*@*.*.*'
 
 jobs:
   release:
