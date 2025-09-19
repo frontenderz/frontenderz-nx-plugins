@@ -45,15 +45,15 @@
   },
   "release": {
     "projects": ["packages/*"],
-    "version": {
-      "conventionalCommits": true
-    },
     "changelog": {
       "projectChangelogs": true
     },
-    "git": {
-      "commit": true,
-      "tag": true
+    "version": {
+      "conventionalCommits": true,
+      "git": {
+        "commit": true,
+        "tag": true
+      }
     }
   }
 }
