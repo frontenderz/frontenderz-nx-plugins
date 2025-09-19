@@ -38,9 +38,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Create Version and Tag
-        # FIX: Add the '--base' flag to give Nx an explicit starting point
-        # for change detection in the CI environment.
-        run: npx nx release version --base=main~1
+        # This explicitly tells Nx how to handle the initial release in a CI environment.
+        run: npx nx release version --first-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
