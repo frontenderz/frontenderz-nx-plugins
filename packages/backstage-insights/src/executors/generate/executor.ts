@@ -9,6 +9,7 @@ import {
   OwnerMapping,
   ValueMapping,
   CompositeMapping,
+  ProviderContext,
 } from '../../lib/types';
 import {
   staticProvider,
@@ -90,7 +91,17 @@ export default async function generateExecutor(
 
   // 2. Compose Component Entities from the Nx graph
   const graph = await createProjectGraphAsync();
-  const gitRepoSlug = gitProvider({ executorContext } as any);
+
+  // FIX: Create a context object that satisfies the gitProvider's signature.
+  // Since it only needs executorContext, we can provide dummy/empty values for the rest.
+  const gitProviderContext: ProviderContext = {
+    executorContext,
+    projectNode: null, // Not used by gitProvider
+    graph: null,       // Not used by gitProvider
+    gitRepoSlug: '',   // Not used by gitProvider
+  };
+  const gitRepoSlug = gitProvider(gitProviderContext);
+
   const componentDocs: BackstageComponent[] = [];
   let skippedCount = 0;
 
@@ -98,7 +109,7 @@ export default async function generateExecutor(
     const projectNode = graph.nodes[projectName];
     if (projectNode.type !== 'app' && projectNode.type !== 'lib') continue;
 
-    const providerContext = {
+    const providerContext: ProviderContext = {
       executorContext,
       projectNode,
       graph,
@@ -131,8 +142,7 @@ export default async function generateExecutor(
 
     for (const keyPath in config.mappings) {
       const mapping = config.mappings[keyPath];
-      // value can be: string | number | boolean | object | null | undefined
-      let value: unknown;
+      let value;
 
       switch (mapping.provider) {
         case 'static':

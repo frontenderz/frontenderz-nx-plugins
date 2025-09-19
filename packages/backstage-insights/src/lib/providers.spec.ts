@@ -113,6 +113,7 @@ describe('providers', () => {
       // Arrange: Spy on console.error and provide a mock implementation that does nothing.
       const consoleErrorSpy = jest
         .spyOn(console, 'error')
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
         .mockImplementation(() => {});
 
       mockExecSync.mockImplementation(() => {

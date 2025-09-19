@@ -6,7 +6,6 @@ import {
 import * as fs from 'fs';
 import * as path from 'path';
 import { execSync } from 'child_process';
-import { ProjectGraphProjectNode } from '@nx/devkit';
 
 // --- Provider Implementations ---
 
@@ -74,11 +73,11 @@ export function gitProvider({ executorContext }: ProviderContext): string {
     })
       .toString()
       .trim();
-    const match = remoteUrl.match(/[\/:]([\w-]+)\/([\w-]+)\.git/);
+    const match = remoteUrl.match(/[/:]([\w-]+)\/([\w-]+)\.git/);
     if (match) {
       return `${match[1]}/${match[2]}`;
     }
-  } catch (e) {
+  } catch {
     console.error(
       "Could not determine git remote URL. Is this a git repository with a remote named 'origin'?"
     );

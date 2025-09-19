@@ -33,7 +33,7 @@ export default async function (tree: Tree) {
       if (projectConfig.owners && Array.isArray(projectConfig.owners)) {
         projectConfig.owners.forEach((owner) => allOwners.add(owner));
       }
-    } catch (e) {
+    } catch  {
       console.warn(`Could not read project configuration for ${projectName}.`);
     }
   }
