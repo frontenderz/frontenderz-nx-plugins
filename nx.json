@@ -46,7 +46,8 @@
   "release": {
     "projects": ["packages/*"],
     "changelog": {
-      "projectChangelogs": true
+      "projectChangelogs": true,
+      "createRelease": false
     },
     "version": {
       "conventionalCommits": true,
