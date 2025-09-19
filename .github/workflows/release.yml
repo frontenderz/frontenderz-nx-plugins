@@ -42,12 +42,10 @@ jobs:
         run: npx nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          # GITHUB_TOKEN is needed for nx release to create GitHub releases
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for nx release to create GitHub releases
 
       - name: Generate SLSA Provenance
         # This step runs AFTER a successful publish to attest to the build.
-        # In a multi-package repo, this would need to be made dynamic.
         # For our MVP, we hardcode the path to our single package.
         uses: actions/attest-build-provenance@v1
         with:
