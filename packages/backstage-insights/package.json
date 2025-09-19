@@ -7,6 +7,9 @@
   "type": "commonjs",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@nx/devkit": "21.4.1",
     "js-yaml": "3.14.1",
