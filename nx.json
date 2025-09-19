@@ -48,7 +48,11 @@
     "projects": ["packages/*"],
     "changelog": {
       "projectChangelogs": true,
-      "createRelease": false
+      "createRelease": false,
+      "entryWhenNoChanges": false,
+      "renderOptions": {
+        "excludeCommitTypes": ["chore", "ci", "test", "style"]
+      }
     },
     "version": {
       "conventionalCommits": true,
