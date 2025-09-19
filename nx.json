@@ -55,8 +55,7 @@
       "git": {
         "commit": true,
         "tag": true,
-        "push": true,
-        "tagMessage": "{tag}"
+        "push": true
       },
       "fallbackCurrentVersionResolver": "disk"
     }
