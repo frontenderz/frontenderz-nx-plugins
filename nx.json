@@ -44,6 +44,7 @@
     }
   },
   "release": {
+    "projectsRelationship": "independent",
     "projects": ["packages/*"],
     "changelog": {
       "projectChangelogs": true,
@@ -54,7 +55,8 @@
       "git": {
         "commit": true,
         "tag": true,
-        "push": true
+        "push": true,
+        "tagMessage": "{tag}"
       },
       "fallbackCurrentVersionResolver": "disk"
     }
