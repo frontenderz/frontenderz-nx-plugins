@@ -38,10 +38,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Create Version and Tag
-        # This command will calculate the next version based on conventional commits,
-        # update package.json, generate a changelog, and create a commit and tag.
-        # It will then push these back to the 'main' branch.
-        run: npx nx release version
+        # FIX: Add the '--base' flag to give Nx an explicit starting point
+        # for change detection in the CI environment.
+        run: npx nx release version --base=main~1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
