@@ -53,7 +53,8 @@
       "git": {
         "commit": true,
         "tag": true
-      }
+      },
+      "fallbackCurrentVersionResolver": "disk"
     }
   }
 }
