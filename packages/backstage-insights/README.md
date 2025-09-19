@@ -1,6 +1,6 @@
 # Backstage Insights for Nx (`@frontenderz/backstage-insights`) [![npm version](https://badge.fury.io/js/%40frontenderz%2Fbackstage-insights.svg)](https://badge.fury.io/js/%40frontenderz%2Fbackstage-insights)
 
-> **Note:** This is an early-stage `v0.1.0` release. It has been tested on our internal demo repository, but it has not yet been battle-tested in a wide variety of production environments. Please use with care and be sure to report any issues you encounter.
+> **Note:** This is an early-stage release. It has been tested on our internal demo repository, but it has not yet been battle-tested in a wide variety of production environments. Please use with care and be sure to report any issues you encounter.
 
 A powerful Nx Plugin that automates the discovery of your monorepo's components and ownership, generating a valid and interconnected software catalog for [Backstage](https://backstage.io).
 
