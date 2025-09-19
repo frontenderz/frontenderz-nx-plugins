@@ -1,6 +1,6 @@
 {
   "name": "@frontenderz/backstage-insights",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "executors": "./executors.json",
   "generators": "./generators.json",
   "type": "commonjs",
