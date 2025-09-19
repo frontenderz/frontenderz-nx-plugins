@@ -1,0 +1,46 @@
+name: CI - Version and Tag on Main
+
+# This workflow runs ONLY when a push happens on the main branch.
+# This is typically after a pull request is merged.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  version:
+    name: Create Version and Tag
+    runs-on: ubuntu-latest
+    permissions:
+      # This workflow needs write access to the repository to push the
+      # version commit and the new tag.
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history to allow nx release to determine changes
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Configure Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Version and Tag
+        # This command will calculate the next version based on conventional commits,
+        # update package.json, generate a changelog, and create a commit and tag.
+        # It will then push these back to the 'main' branch.
+        run: npx nx release version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
