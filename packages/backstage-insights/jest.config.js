@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports = {
   displayName: 'backstage-insights',
   preset: '../../jest.preset.js',

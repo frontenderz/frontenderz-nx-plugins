@@ -58,8 +58,9 @@ describe('generateExecutor', () => {
         dependencies: {},
       },
     };
-
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
   });
 
