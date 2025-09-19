@@ -3,19 +3,8 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/backstage-insights/src",
   "projectType": "library",
-  "release": {
-    "version": {
-      "manifestRootsToUpdate": ["dist/{projectRoot}"],
-      "currentVersionResolver": "git-tag",
-      "fallbackCurrentVersionResolver": "disk"
-    }
-  },
   "tags": [],
   "targets": {
-    "generate": {
-      "executor": "./src/executors/generate:default",
-      "options": {}
-    },
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
@@ -26,51 +15,24 @@
         "assets": [
           "packages/backstage-insights/*.md",
           "packages/backstage-insights/executors.json",
-          "packages/backstage-insights/generators.json",
-          {
-            "input": "./packages/backstage-insights/src",
-            "glob": "**/!(*.ts)",
-            "output": "./src"
-          },
-          {
-            "input": "./packages/backstage-insights/src",
-            "glob": "**/*.d.ts",
-            "output": "./src"
-          },
-          {
-            "input": "./packages/backstage-insights",
-            "glob": "generators.json",
-            "output": "."
-          },
-          {
-            "input": "./packages/backstage-insights",
-            "glob": "executors.json",
-            "output": "."
-          }
+          "packages/backstage-insights/generators.json"
         ]
       }
-    },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "dist/{projectRoot}"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "packages/backstage-insights/jest.config.js",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "packages/backstage-insights/jest.config.js"
       }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "generate": {
+      "executor": "./src/executors/generate:default",
+      "options": {}
     }
   }
 }
+
