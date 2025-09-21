@@ -56,12 +56,12 @@
     },
     "version": {
       "conventionalCommits": true,
-      "git": {
-        "commit": true,
-        "tag": true,
-        "push": true
-      },
       "fallbackCurrentVersionResolver": "disk"
+    },
+    "git": {
+      "commit": true,
+      "tag": true,
+      "push": true
     }
   }
 }
