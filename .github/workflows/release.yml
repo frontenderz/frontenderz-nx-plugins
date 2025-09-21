@@ -1,19 +1,20 @@
-name: CD - Secure Release to NPM
+name: CD - Version and Release to NPM
 
-# This workflow is triggered ONLY when a new tag is pushed that matches the
-# independent versioning pattern (e.g., 'refs/tags/backstage-insights@0.1.0').
+# This workflow's ONLY trigger is a push to the main branch (e.g., a PR merge).
 on:
   push:
-    tags:
-      - '*@[0-9]+.[0-9]+.[0-9]+'
+    branches:
+      - main
 
 jobs:
   release:
-    name: Secure Release
+    name: Create Version and Publish
     runs-on: ubuntu-latest
+    # This job requires write permissions for contents (to push the tag)
+    # and id-token (for OIDC publish).
     permissions:
-      contents: read
-      id-token: write # Required for OIDC tokenless authentication
+      contents: write
+      id-token: write
 
     steps:
       - name: Checkout Repository
@@ -27,28 +28,35 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          # This step is required for OIDC publishing
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: npm install
 
+      - name: Configure Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create Version and Tag
+        # This command will calculate the version, update package.json,
+        # create the changelog, and push a commit and tag.
+        run: npx nx release version --first-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build the package for release
-        # This is a deliberate step to ensure a hermetic build for security and provenance.
-        # It creates the `dist/` directory that the next step needs.
+        # This command now runs AFTER the versioning is complete.
         run: npx nx release build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate SLSA Provenance
-        # This step runs AFTER the build and BEFORE the publish.
-        # It now has a subject in the `dist/` directory to attest to.
         uses: actions/attest-build-provenance@v1
         with:
           subject-path: "dist/packages/backstage-insights"
 
       - name: Publish to NPM
-        # This step will use the cached build artifacts from the previous step and publish to NPM.
         run: npx nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
