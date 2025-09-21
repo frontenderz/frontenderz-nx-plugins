@@ -10,6 +10,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontenderz/frontenderz-nx-plugins.git",
+    "directory": "packages/backstage-insights"
+  },  
   "dependencies": {
     "@nx/devkit": "21.4.1",
     "js-yaml": "3.14.1",
