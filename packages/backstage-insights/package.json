@@ -1,6 +1,6 @@
 {
   "name": "@frontenderz/backstage-insights",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "An Nx plugin to generate a Backstage software catalog from your Nx monorepo.",
   "executors": "./executors.json",
   "generators": "./generators.json",
@@ -10,6 +10,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontenderz/frontenderz-nx-plugins.git",
+    "directory": "packages/backstage-insights"
+  },  
   "dependencies": {
     "@nx/devkit": "21.4.1",
     "js-yaml": "3.14.1",
