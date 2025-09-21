@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "title": "Backstage Insights Init Generator",
+  "description": "Initializes the workspace with the necessary configuration files for the Backstage Insights plugin.",
+  "type": "object",
+  "properties": {}
+}

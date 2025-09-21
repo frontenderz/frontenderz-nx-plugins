@@ -1,0 +1,33 @@
+name: CI - Pull Request Quality Gate
+
+# This workflow's ONLY responsibility is to validate pull requests.
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality_gate:
+    name: PR Quality Gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # We still need the full history for Nx 'affected' commands.
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Linter, Tests, and Build on Affected Projects
+        run: |
+          npx nx affected --target=lint --base=origin/main --head=HEAD
+          npx nx affected --target=test --base=origin/main --head=HEAD
+          npx nx affected --target=build --base=origin/main --head=HEAD

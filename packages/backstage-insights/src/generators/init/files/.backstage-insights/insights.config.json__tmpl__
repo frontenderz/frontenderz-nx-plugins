@@ -1,0 +1,20 @@
+{
+  "mappings": {
+    "apiVersion": { "provider": "static", "value": "backstage.io/v1alpha1" },
+    "kind": { "provider": "static", "value": "Component" },
+    "metadata.name": { "provider": "nxGraph", "value": "name" },
+    "metadata.description": { "provider": "projectJson", "value": "description" },
+    "metadata.annotations['github.com/project-slug']": {
+      "provider": "composite",
+      "values": [
+        { "provider": "git", "value": "repoSlug" },
+        { "provider": "nxGraph", "value": "root" }
+      ],
+      "separator": "/tree/main/"
+    },
+    "spec.type": { "provider": "nxGraph", "value": "type" },
+    "spec.lifecycle": { "provider": "static", "value": "production" },
+    "spec.owner": { "provider": "projectJson", "value": "owners" },
+    "spec.dependsOn": { "provider": "nxGraph", "value": "dependencies" }
+  }
+}
