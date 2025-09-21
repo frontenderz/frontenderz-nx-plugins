@@ -52,16 +52,21 @@
       "entryWhenNoChanges": false,
       "renderOptions": {
         "excludeCommitTypes": ["chore", "ci", "test", "style"]
+      },
+      "git": {
+        "commit": true,
+        "tag": true,
+        "push": true
       }
     },
     "version": {
       "conventionalCommits": true,
-      "fallbackCurrentVersionResolver": "disk"
-    },
-    "git": {
-      "commit": true,
-      "tag": true,
-      "push": true
+      "fallbackCurrentVersionResolver": "disk",
+      "git": {
+        "commit": true,
+        "tag": true,
+        "push": true
+      }
     }
   }
 }
