@@ -49,6 +49,8 @@ The `init` generator has created a default mapping file for you at `.backstage-i
     * This is the name that will be used to **create a `Group` entity** in the generated `ownership.yaml` file.
     * This is also the name that your components will be assigned to.
     * Ensure these names are the official, canonical names you want to use for teams within your Backstage instance. If your Backstage `Group` names are different from your `nxOwner` names, update the `backstageOwner` values accordingly.
+    * If you have any team names in here that don't exist as a Group in Backstage, and you import the file with appropriate 
+    permissions, it will add these team names.
 
 ### Step 4: Generate Your Catalog Files
 
