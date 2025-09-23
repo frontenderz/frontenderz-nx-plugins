@@ -1,3 +1,13 @@
+## 0.1.1 (2025-09-23)
+
+### 🩹 Fixes
+
+- first version that will land on npmjs ([640d35b](https://github.com/frontenderz/frontenderz-nx-plugins/commit/640d35b))
+
+### ❤️ Thank You
+
+- Jouke Visser @jouke
+
 ## 0.1.0 (2025-09-21)
 
 ### 🚀 Features
