@@ -2,6 +2,7 @@
 
 > **Note:** This is an early-stage release. It has been tested on our internal demo repository, but it has not yet been battle-tested in a wide variety of production environments. Please use with care and be sure to report any issues you encounter.
 
+![Nx and Backstage in love on a beach](https://frontenderz.io/hubfs/nx-backstage-on-the-beach.png)
 A powerful Nx Plugin that automates the discovery of your monorepo's components and ownership, generating a valid and interconnected software catalog for [Backstage](https://backstage.io).
 
 This tool acts as the essential bridge between the technical, graph-based reality of your Nx workspace and the socio-technical, entity-based model of Backstage.
